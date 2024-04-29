@@ -6,14 +6,13 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="connexion.php" method="post">
+    <form action="../controllers/modifUser.php" method="post">
 
-        <label for="newpassword">Nouveau mot de passe</label>
-        <input type="text" id="newpassword" name="newpassword">
+        <label for="username">user</label>
+        <input type="text" id="username" name="username">
 
         
-        <label for="password">Confirmez votre mot de passe</label>
-        <input type="text" id="password" name="password">
+
 
         <button>Valider</button>
 </body>

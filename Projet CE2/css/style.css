@@ -11,3 +11,9 @@ aside {
 aside > p {
   margin: 0.5rem;
 }
+.delete {
+  margin: 0;
+  width: 40px;
+  height: 20px;
+  border-radius: 20%;
+}

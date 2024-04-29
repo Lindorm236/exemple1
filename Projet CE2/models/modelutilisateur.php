@@ -27,11 +27,24 @@ class ModelUtilisateur{
         }
     }
 
-    public function getUserByPassword($pw){
-        $sql=$this->db->query("SELECT password FROM user WHERE password='".$pw."' ");
-
+    public function getUserByUsername($username){
+      
+         try{
+            $response= $this->db->prepare("SELECT * FROM user WHERE username='".$username."'");
+            $response->execute();
+            $utilisateurs= array();
+            while ($row = $response->fetch(PDO::FETCH_ASSOC)) {
+               $utilisateurs[]= new Utilisateur($row["id"], $row["prenom"], $row["nom"], $row["username"], $row["password"], $row["profil"]);
+            }
+            return $utilisateurs;
+        }
+        catch(PDOException $e){
+            echo"Erreur lors de l'execution de la requete :". $e->getMessage();
+            return array();
+        }
+    }
         
-    } 
+    
 
     public function connexion($login, $pw){
         $sql= $this->db->query("SELECT profil  FROM user WHERE username='".$login."' AND password='".$pw."'");
@@ -65,5 +78,17 @@ class ModelUtilisateur{
         ));
    
     }
+
+    public function updateUser($username){
+        try{
+            $sql= $this->db->query("UPDATE user SET nom, prenom, username, password WHERE username='".$username."'");
+
+            $sql->execute();
+        }
+        catch(PDOException $e){
+            echo"Erreur lors de l'execution de la requete :". $e->getMessage();
+        }
+    }
+
 }
 
